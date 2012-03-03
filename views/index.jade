@@ -1,14 +1,21 @@
 doctype 5
 html(lang='en')
   head
+    title pinnit
     script(type='text/javascript', src='js/lib/jquery-1.7.1.min.js');
     script(type='text/javascript', src='js/lib/underscore.js');
     script(type='text/javascript', src='js/lib/backbone.js');
-    script(type='text/javascript', src='js/application.js');
+
+    link(href='styles/pinnit.css rel='stylesheet')
+    script(type='text/javascript', src='/application.js');
   body
-    #container
-      #header
-      #categories
-      #wrapper
-        #columnContainer
-      p You are amazing
+    div#container
+      div#header
+      div#categories
+      div#wrapper
+        div#columnContainer
+    script(id='pintemplate', type='text/template')
+      div.pin
+        div.pinimage
+          | <img src= <%= model.attributes.data.url %> />
+        p <%= model.attributes.data.title %>

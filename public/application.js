@@ -1,9 +1,11 @@
 $(function(){
+  //Pinnit Model
   window.Pinnit = Backbone.Model.extend({
   });
 
+  //Pinnit Collection
   window.PinnitCollection = Backbone.Collection.extend({
-    model: window.Pinnit,
+    model: Pinnit,
 
     initialize: function() {
     },
@@ -13,15 +15,30 @@ $(function(){
     },
 
     parse: function(response) {
-      return response.data.children;
+      return response;
     }
 
   });
 
   window.Pinnits = new PinnitCollection;
 
-  window.AppView = Backbone.View.Extend({
-    el: $('#container')
+  //Pinnit Application
+  window.AppView = Backbone.View.extend({
+    el: $('#container'),
+
+    pinTemplate: _.template($('#pintemplate').html()),
+    
+    initialize: function() {
+      Pinnits.bind('all', this.render, this);
+      Pinnits.fetch();
+    },
+
+    render: function() {
+      var that = this;
+      _.each(Pinnits.models, function(model) {
+        this.$('#columnContainer').append(that.pinTemplate({model: model}));
+      });
+    }
   });
 
   window.App = new AppView;
