@@ -17,8 +17,9 @@ app.get('/jsrv/', function(req, res){
    response.on('data', function (chunk) {
      bodyArr.push(chunk.toString());
    });
-   response.on('end', function (chunk) {
-     res.send(JSON.parse(bodyArr.join('')));
+   response.on('end', function () {
+     var jsonBody = JSON.parse(bodyArr.join(''))
+     res.send(jsonBody.data.children);
    });
   });
 
