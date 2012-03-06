@@ -35,8 +35,27 @@ $(function(){
 
     render: function() {
       var that = this;
+
+      var width = 192;
+      var columns = [];
+      var columnNum = 4;
+      for(var i = 0; i < columnNum; i += 1) {
+        columns[i] = 0;
+      };
       _.each(Pinnits.models, function(model) {
         this.$('#columnContainer').append(that.pinTemplate({model: model}));
+        var pin = this.$('#columnContainer').children().last();
+        
+        var column = 0;
+        for(var i = 0; i < columnNum; i+= 1) {
+          if(columns[i] < columns[column]) {
+            column = i;
+          };
+        };
+        var left = column * width;
+        var top  = columns[column] + $(pin).height();
+        $(pin).css({'top': top, 'left': left});
+        columns[column] += $(pin).height();
       });
     }
   });

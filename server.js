@@ -1,7 +1,6 @@
 var http = require('http');
 var express = require('express');
 var jade = require('jade');
-var sass = require('sass');
 var app = express.createServer();
 
 app.set('view options',{layout: false});
@@ -32,4 +31,4 @@ app.get('/', function(req, res) {
 });
 
 
-app.listen(3000);
+app.listen(8080);
