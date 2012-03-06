@@ -1,0 +1,8 @@
+.pin {
+  position: absolute;
+  max-width: 192px;
+}
+
+.pin img{
+  max-width: 192px;
+}
